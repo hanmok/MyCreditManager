@@ -32,7 +32,10 @@ while command != "X" {
             print(Student.PromptMessages.add.message)
             let studentName = readLine()!
             student.handleAddition(name: studentName)
-        case "2":break
+        case "2":
+            print(Student.PromptMessages.delete.message)
+            let studentName = readLine()!
+            student.handleDeletion(name: studentName)
         case "3":break
         case "4":break
         case "5":break

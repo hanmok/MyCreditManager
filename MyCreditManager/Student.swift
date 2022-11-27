@@ -14,21 +14,19 @@ class Student {
     
     var students = [String]()
     
-    
-    func addStudent(_ name: String, nameList: [String]) throws {
+    func addStudent(_ name: String) throws {
         if name.count == 0 {
             throw AdditionError.Empty
         }
-        if nameList.contains(name) {
+        if students.contains(name) {
             throw AdditionError.Duplicate
         }
     }
     
     
     func handleAddition(name: String) {
-        
         do {
-            try addStudent(name, nameList: students)
+            try addStudent(name)
             students.append(name)
             print("\(name) 학생을 추가했습니다.")
             
@@ -42,11 +40,24 @@ class Student {
     }
     
     
-    func deleteStudent(_ name: String, nameList: [String]) throws {
-        if nameList.contains(name) {
-            print("\(name) 학생을 삭제하였습니다.")
+    func deleteStudent(_ name: String) throws {
+        if students.contains(name) {
+            students.removeAll(where: { $0 == name})
         } else {
             throw DeletionError.NotFound
+        }
+    }
+    
+    func handleDeletion(name: String) {
+        do {
+            try deleteStudent(name)
+            print("\(name) 학생을 삭제하였습니다.")
+            
+        } catch DeletionError.NotFound {
+            print("\(name) 학생을 찾지 못했습니다.")
+        
+        } catch {
+            print("another Error")
         }
     }
 }

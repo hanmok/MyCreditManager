@@ -9,10 +9,15 @@ import Foundation
 
 
 
-
 class Student {
     
-    var students = [String]()
+    var name: String
+    var grade = Grade()
+    
+    init(name: String) {
+//        addStudent(name)
+        self.name = name
+    }
     
     func addStudent(_ name: String) throws {
         if name.count == 0 {

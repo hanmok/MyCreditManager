@@ -20,6 +20,8 @@ print("Hello, World!")
 
 let student = Student()
 
+let studentList = [Student]()
+
 var command = ""
 
 while command != "X" {
@@ -39,7 +41,9 @@ while command != "X" {
         case "3":break
         case "4":break
         case "5":break
-        case "X":break
+        case "X":
+            print("프로그램을 종료합니다...")
+            break
         default: print("뭔가 입력이 잘못되었습니다. 1~5 사이의 숫자 혹은 X를 입력해주세요.")
     }
 }

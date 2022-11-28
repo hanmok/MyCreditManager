@@ -42,20 +42,17 @@ while command != "X" {
         case "3":
             print(Grade.PromptMessages.add.message)
             let input = readLine()!
-//            let sub = input.components(separatedBy: " ")
             Grade.handleInput(input: input, list: studentList)
-            // input 을 세 파트로 나누기.
-            // 학생이 있는지 없는지 확인
-                // 있으면 과목이 있는지 없는지 확인
-                // 있으면 업데이트, 없으면 추가.
-            // 없으면 Error !
-            
         case "4":
             print(Grade.PromptMessages.delete.message)
             let input = readLine()!
             Grade.handleDeletion(input: input, list: studentList)
             
-        case "5":break // 평점 보기 
+        case "5": // 평점 보기
+            print(Grade.PromptMessages.overallGrade.message)
+            let input = readLine()!
+            Grade.handleShowingScores(nameInput: input, list: studentList)
+            
         case "X":
             print("프로그램을 종료합니다...")
             break
@@ -66,5 +63,4 @@ while command != "X" {
     for student in studentList {
         print("info: \(student.name), \(student.grade.scores)")
     }
-    
 }

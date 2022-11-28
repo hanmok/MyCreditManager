@@ -9,7 +9,17 @@ import Foundation
 
 // Student has Grade.
 class Grade {
-    var scores: [String: Double] = [:]
+    var scores: [String: String] = [:]
+    
+    var average: Double {
+        let validScores = scores
+        var sum = 0.0
+        for (_, scoreName) in validScores {
+            let score = Grade.gradeRule[scoreName]!
+            sum += score
+        }
+        return sum / Double(validScores.count)
+    }
     
     static let gradeRule: [String: Double] = [
         "A+": 4.5,
@@ -23,12 +33,32 @@ class Grade {
         "F": 0
     ]
     
+    static func handleShowingScores(nameInput: String, list: [Student]) {
+        if let targetStudent = list.first(where:  { $0.name == nameInput}) {
+            let grade = targetStudent.grade
+            for (scoreName, score) in grade.scores {
+                print("\(scoreName): \(score)")
+            }
+            print("평점: \(grade.average.truncate(places: 2))")
+        } else {
+            if nameInput.count == 0 {
+                print("입력이 잘못되었습니다. 다시 확인해주세요.")
+            } else {
+                print("\(nameInput) 학생을 찾지 못했습니다.")
+            }
+        }
+        
+        
+        
+        
+    }
+    
     static func handleInput(input: String, list: [Student]) {
         let sub = input.components(separatedBy: " ")
         if sub.count == 3 {
-
+            
             let name = sub[0]
-            let gradeName = sub[1]
+            let subjectName = sub[1]
             let score = sub[2]
             
             // 중복
@@ -36,8 +66,8 @@ class Grade {
                 if let validScore = Grade.gradeRule[score] {
 
                     let target = list.first(where: { $0.name == name})!
-                    target.grade.scores[gradeName] = validScore
-
+                    target.grade.scores[subjectName] = score
+                    print("\(name) 학생의 \(subjectName) 과목이 \(score)로 추가(변경)되었습니다.")
                 } else {
                     print(Grade.AdditionInputError.InvalidForm.message)
                 }
@@ -61,14 +91,12 @@ class Grade {
             if list.map({ $0.name }).contains(name) {
                 let targetStudent = list.first(where: { $0.name == name})!
                 
-//                if targetStudent.grade.scores
-                if let validSubjectName = targetStudent.grade.scores[gradeName] {
+                if targetStudent.grade.scores[gradeName] != nil {
                     targetStudent.grade.scores[gradeName] = nil
                     print("\(name) 학생의 \(gradeName) 과목의 성적이 삭제되었습니다.")
                 } else {
                     print(Grade.AdditionInputError.InvalidForm.message)
                 }
-                
             } else {
                 print(Grade.AdditionInputError.notFount(name).message)
             }
@@ -84,6 +112,7 @@ extension Grade {
         /// student name
         case notFount(String)
         
+
         var message: String {
             switch self {
                 case .InvalidForm:
@@ -97,6 +126,7 @@ extension Grade {
     enum PromptMessages {
         case add
         case delete
+        case overallGrade
         
         var message: String {
             switch self {
@@ -111,7 +141,15 @@ extension Grade {
 성적을 삭제할 학생의 이름, 과목 이름을 띄어쓰기로 구분하여 차례로 작성해주세요.
 입력예) Mickey Swift
 """
+                case .overallGrade:
+                    return "평점을 알고싶은 학생의 이름을 입력해주세요."
             }
         }
+    }
+}
+
+extension Double {
+    func truncate(places : Int)-> Double {
+        return Double(floor(pow(10.0, Double(places)) * self)/pow(10.0, Double(places)))
     }
 }

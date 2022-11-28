@@ -10,17 +10,10 @@ import Foundation
 print("Hello, World!")
 
 
-
-// MARK: - 메뉴
-
-
-
-
 // MARK: - 학생 추가
 
-let student = Student()
 
-let studentList = [Student]()
+var studentList = [Student]()
 
 var command = ""
 
@@ -33,12 +26,27 @@ while command != "X" {
         case "1":
             print(Student.PromptMessages.add.message)
             let studentName = readLine()!
-            student.handleAddition(name: studentName)
+
+            if let newList = Student.handleAddition(name: studentName, list: studentList) {
+                studentList = newList
+            }
+            
         case "2":
             print(Student.PromptMessages.delete.message)
             let studentName = readLine()!
-            student.handleDeletion(name: studentName)
-        case "3":break
+            
+            if let newList = Student.handleDeletion(name: studentName, list: studentList) {
+                studentList = newList
+            }
+            
+        case "3":
+            print(Grade.PromptMessages.add)
+            let input = readLine()
+            // input 을 세 파트로 나누기.
+            // 학생이 있는지 없는지 확인
+                // 있으면 과목이 있는지 없는지 확인
+                // 있으면 업데이트, 없으면 추가.
+            // 없으면 Error ! 
         case "4":break
         case "5":break
         case "X":

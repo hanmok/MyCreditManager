@@ -31,6 +31,7 @@ class Grade {
             let gradeName = sub[1]
             let score = sub[2]
             
+            // 중복
             if list.map({ $0.name }).contains(name) {
                 if let validScore = Grade.gradeRule[score] {
 
@@ -44,6 +45,7 @@ class Grade {
             } else {
                 print(Grade.AdditionInputError.notFount(name).message)
             }
+            
         } else {
             // error!
             print(Grade.AdditionInputError.InvalidForm.message)
@@ -51,10 +53,27 @@ class Grade {
     }
     
     static func handleDeletion(input: String, list: [Student]) {
-        
+        let sub = input.components(separatedBy: " ")
+        if sub.count == 2 {
+            let name = sub[0]
+            let gradeName = sub[1]
+            
+            if list.map({ $0.name }).contains(name) {
+                let targetStudent = list.first(where: { $0.name == name})!
+                
+//                if targetStudent.grade.scores
+                if let validSubjectName = targetStudent.grade.scores[gradeName] {
+                    targetStudent.grade.scores[gradeName] = nil
+                    print("\(name) 학생의 \(gradeName) 과목의 성적이 삭제되었습니다.")
+                } else {
+                    print(Grade.AdditionInputError.InvalidForm.message)
+                }
+                
+            } else {
+                print(Grade.AdditionInputError.notFount(name).message)
+            }
+        }
     }
-    
-    
 }
 
 extension Grade {

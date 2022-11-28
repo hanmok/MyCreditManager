@@ -7,12 +7,6 @@
 
 import Foundation
 
-print("Hello, World!")
-
-
-// MARK: - 학생 추가
-
-
 var studentList = [Student]()
 
 var command = ""
@@ -60,7 +54,7 @@ while command != "X" {
         
     }
     
-    for student in studentList {
-        print("info: \(student.name), \(student.grade.scores)")
-    }
+//    for student in studentList {
+//        print("info: \(student.name), \(student.grade.scores)")
+//    }
 }

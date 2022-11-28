@@ -11,7 +11,7 @@ import Foundation
 class Grade {
     var scores: [String: Double] = [:]
     
-    var gradeRule: [String: Double] = [
+    static let gradeRule: [String: Double] = [
         "A+": 4.5,
         "A": 4.0,
         "B+": 3.5,
@@ -22,6 +22,39 @@ class Grade {
         "D": 1.0,
         "F": 0
     ]
+    
+    static func handleInput(input: String, list: [Student]) {
+        let sub = input.components(separatedBy: " ")
+        if sub.count == 3 {
+
+            let name = sub[0]
+            let gradeName = sub[1]
+            let score = sub[2]
+            
+            if list.map({ $0.name }).contains(name) {
+                if let validScore = Grade.gradeRule[score] {
+
+                    let target = list.first(where: { $0.name == name})!
+                    target.grade.scores[gradeName] = validScore
+
+                } else {
+                    print(Grade.AdditionInputError.InvalidForm.message)
+                }
+                
+            } else {
+                print(Grade.AdditionInputError.notFount(name).message)
+            }
+        } else {
+            // error!
+            print(Grade.AdditionInputError.InvalidForm.message)
+        }
+    }
+    
+    static func handleDeletion(input: String, list: [Student]) {
+        
+    }
+    
+    
 }
 
 extension Grade {
@@ -45,7 +78,6 @@ extension Grade {
     enum PromptMessages {
         case add
         case delete
-        
         
         var message: String {
             switch self {

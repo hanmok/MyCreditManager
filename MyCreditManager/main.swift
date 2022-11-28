@@ -40,18 +40,27 @@ while command != "X" {
             }
             
         case "3":
-            print(Grade.PromptMessages.add)
-            let input = readLine()
+            print(Grade.PromptMessages.add.message)
+            let input = readLine()!
+//            let sub = input.components(separatedBy: " ")
+            Grade.handleInput(input: input, list: studentList)
             // input 을 세 파트로 나누기.
             // 학생이 있는지 없는지 확인
                 // 있으면 과목이 있는지 없는지 확인
                 // 있으면 업데이트, 없으면 추가.
-            // 없으면 Error ! 
+            // 없으면 Error !
+            
         case "4":break
         case "5":break
         case "X":
             print("프로그램을 종료합니다...")
             break
         default: print("뭔가 입력이 잘못되었습니다. 1~5 사이의 숫자 혹은 X를 입력해주세요.")
+        
     }
+    for student in studentList {
+//        print(student)
+        print("info: \(student.name), \(student.grade.scores)")
+    }
+    
 }

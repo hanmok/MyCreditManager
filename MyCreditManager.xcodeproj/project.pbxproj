@@ -67,7 +67,6 @@
 				9AFD78302933E11D00E9069C /* main.swift */,
 				9AFD783E2933EC0400E9069C /* Student.swift */,
 				9AFD78402933F03A00E9069C /* Grade.swift */,
-				9AFD783B2933E7BF00E9069C /* Error */,
 				9AFD783A2933E71000E9069C /* Practices */,
 				9AFD78372933E15B00E9069C /* Memo */,
 			);
@@ -80,13 +79,6 @@
 				9AFD78382933E58100E9069C /* ThrowCatchPractice.swift */,
 			);
 			path = Practices;
-			sourceTree = "<group>";
-		};
-		9AFD783B2933E7BF00E9069C /* Error */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Error;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

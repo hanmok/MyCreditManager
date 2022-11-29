@@ -8,9 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		9AFD78312933E11D00E9069C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD78302933E11D00E9069C /* main.swift */; };
-		9AFD78392933E58100E9069C /* ThrowCatchPractice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD78382933E58100E9069C /* ThrowCatchPractice.swift */; };
 		9AFD783F2933EC0400E9069C /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD783E2933EC0400E9069C /* Student.swift */; };
 		9AFD78412933F03A00E9069C /* Grade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD78402933F03A00E9069C /* Grade.swift */; };
+		9AFD7844293555D900E9069C /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD7843293555D900E9069C /* Double+Ext.swift */; };
+		9AFD784B2936578A00E9069C /* StudentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD784A2936578A00E9069C /* StudentError.swift */; };
+		9AFD784E293657A300E9069C /* InputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD784D293657A300E9069C /* InputError.swift */; };
+		9AFD7850293657B700E9069C /* CompletionMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD784F293657B700E9069C /* CompletionMessage.swift */; };
+		9AFD78522936585200E9069C /* IntroMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD78512936585200E9069C /* IntroMessage.swift */; };
+		9AFD78562936598E00E9069C /* Student+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD78552936598E00E9069C /* Student+Ext.swift */; };
+		9AFD785829365C0600E9069C /* GradeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD785729365C0600E9069C /* GradeError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,10 +34,15 @@
 /* Begin PBXFileReference section */
 		9AFD782D2933E11D00E9069C /* MyCreditManager */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MyCreditManager; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AFD78302933E11D00E9069C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		9AFD78372933E15B00E9069C /* Memo */ = {isa = PBXFileReference; lastKnownFileType = text; path = Memo; sourceTree = "<group>"; };
-		9AFD78382933E58100E9069C /* ThrowCatchPractice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrowCatchPractice.swift; sourceTree = "<group>"; };
 		9AFD783E2933EC0400E9069C /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		9AFD78402933F03A00E9069C /* Grade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grade.swift; sourceTree = "<group>"; };
+		9AFD7843293555D900E9069C /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
+		9AFD784A2936578A00E9069C /* StudentError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentError.swift; sourceTree = "<group>"; };
+		9AFD784D293657A300E9069C /* InputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputError.swift; sourceTree = "<group>"; };
+		9AFD784F293657B700E9069C /* CompletionMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionMessage.swift; sourceTree = "<group>"; };
+		9AFD78512936585200E9069C /* IntroMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroMessage.swift; sourceTree = "<group>"; };
+		9AFD78552936598E00E9069C /* Student+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Student+Ext.swift"; sourceTree = "<group>"; };
+		9AFD785729365C0600E9069C /* GradeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,20 +76,49 @@
 			isa = PBXGroup;
 			children = (
 				9AFD78302933E11D00E9069C /* main.swift */,
-				9AFD783E2933EC0400E9069C /* Student.swift */,
-				9AFD78402933F03A00E9069C /* Grade.swift */,
-				9AFD783A2933E71000E9069C /* Practices */,
-				9AFD78372933E15B00E9069C /* Memo */,
+				9AFD78542936596400E9069C /* Model */,
+				9AFD784C2936579200E9069C /* Messages */,
+				9AFD78492936576B00E9069C /* Errors */,
+				9AFD78532936595500E9069C /* Extensions */,
 			);
 			path = MyCreditManager;
 			sourceTree = "<group>";
 		};
-		9AFD783A2933E71000E9069C /* Practices */ = {
+		9AFD78492936576B00E9069C /* Errors */ = {
 			isa = PBXGroup;
 			children = (
-				9AFD78382933E58100E9069C /* ThrowCatchPractice.swift */,
+				9AFD784A2936578A00E9069C /* StudentError.swift */,
+				9AFD784D293657A300E9069C /* InputError.swift */,
+				9AFD785729365C0600E9069C /* GradeError.swift */,
 			);
-			path = Practices;
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		9AFD784C2936579200E9069C /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				9AFD784F293657B700E9069C /* CompletionMessage.swift */,
+				9AFD78512936585200E9069C /* IntroMessage.swift */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
+		9AFD78532936595500E9069C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9AFD7843293555D900E9069C /* Double+Ext.swift */,
+				9AFD78552936598E00E9069C /* Student+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		9AFD78542936596400E9069C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9AFD783E2933EC0400E9069C /* Student.swift */,
+				9AFD78402933F03A00E9069C /* Grade.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,10 +179,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AFD784B2936578A00E9069C /* StudentError.swift in Sources */,
+				9AFD7850293657B700E9069C /* CompletionMessage.swift in Sources */,
+				9AFD784E293657A300E9069C /* InputError.swift in Sources */,
+				9AFD785829365C0600E9069C /* GradeError.swift in Sources */,
+				9AFD78562936598E00E9069C /* Student+Ext.swift in Sources */,
 				9AFD78312933E11D00E9069C /* main.swift in Sources */,
+				9AFD78522936585200E9069C /* IntroMessage.swift in Sources */,
 				9AFD78412933F03A00E9069C /* Grade.swift in Sources */,
-				9AFD78392933E58100E9069C /* ThrowCatchPractice.swift in Sources */,
 				9AFD783F2933EC0400E9069C /* Student.swift in Sources */,
+				9AFD7844293555D900E9069C /* Double+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

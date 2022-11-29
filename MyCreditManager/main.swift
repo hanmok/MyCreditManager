@@ -7,54 +7,66 @@
 
 import Foundation
 
-var studentList = [Student]()
+enum MenuSelectionType: String {
+    case studentAddition = "1"
+    case studentDeletion = "2"
+    case scoreUpdate = "3"
+    case scoreDeletion = "4"
+    case scorePrinting = "5"
+    case end = "X"
+}
 
-var command = ""
+var students = [Student]()
 
-while command != "X" {
-    print("원하는 기능을 입력해주세요")
-    print("1: 학생추가, 2: 학생삭제, 3: 성적추가(변경), 4: 성적삭제, 5: 평점보기, X: 종료")
-    command = readLine()!
-    
-    switch command {
-        case "1":
-            print(Student.PromptMessages.add.message)
-            let studentName = readLine()!
-
-            if let newList = Student.handleAddition(name: studentName, list: studentList) {
-                studentList = newList
-            }
-            
-        case "2":
-            print(Student.PromptMessages.delete.message)
-            let studentName = readLine()!
-            
-            if let newList = Student.handleDeletion(name: studentName, list: studentList) {
-                studentList = newList
-            }
-            
-        case "3":
-            print(Grade.PromptMessages.add.message)
-            let input = readLine()!
-            Grade.handleInput(input: input, list: studentList)
-        case "4":
-            print(Grade.PromptMessages.delete.message)
-            let input = readLine()!
-            Grade.handleDeletion(input: input, list: studentList)
-            
-        case "5": // 평점 보기
-            print(Grade.PromptMessages.overallGrade.message)
-            let input = readLine()!
-            Grade.handleShowingScores(nameInput: input, list: studentList)
-            
-        case "X":
-            print("프로그램을 종료합니다...")
-            break
-        default: print("뭔가 입력이 잘못되었습니다. 1~5 사이의 숫자 혹은 X를 입력해주세요.")
-        
+func run() {
+    print(IntroMessage.main.message)
+    guard let command = readLine() else {
+        run()
+        return
     }
-    
-//    for student in studentList {
-//        print("info: \(student.name), \(student.grade.scores)")
-//    }
+
+        switch command {
+            case MenuSelectionType.studentAddition.rawValue:
+                handleStudentAddition(students: students) { student in
+                    guard let student = student else { return }
+                    students.append(student)
+                }
+                
+            case MenuSelectionType.studentDeletion.rawValue:
+                handleStudentDeletion(students: students) { student in
+                    guard let deletingStudent = student else { return }
+                    students.removeAll(where: { $0 == deletingStudent })
+                }
+                
+            case MenuSelectionType.scoreUpdate.rawValue:
+                handleUpdatingGrade(from: students) { student in
+                    guard let student = student else { return }
+                    students = getNewStudents(from: students, updated: student)
+                }
+                
+            case MenuSelectionType.scoreDeletion.rawValue:
+                handleDeletingGrade(from: students) { student in
+                    guard let student = student else { return }
+                    students = getNewStudents(from: students, updated: student)
+                }
+
+            case MenuSelectionType.scorePrinting.rawValue:
+                handlePrintingScores(from: students)
+                
+            case MenuSelectionType.end.rawValue:
+                print(CompletionMessage.endProgram.message)
+                return
+            default:
+                print(InputError.wrongInitial.message)
+        }
+    run()
+}
+
+run()
+
+func getNewStudents(from students: [Student], updated student: Student) -> [Student] {
+    var newStudents = students
+    guard let studentIndex = students.firstIndex(of: student) else { fatalError() }
+    newStudents[studentIndex] = student
+    return newStudents
 }

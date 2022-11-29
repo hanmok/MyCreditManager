@@ -9,10 +9,8 @@ import Foundation
 
 enum IntroMessage {
     case main
-    
     case studentAddition
     case studentDeletion
-    
     case gradeAddition
     case gradeDeletion
     case gradePrinting

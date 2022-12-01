@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum StudentError: Error {
+enum StudentError: Error, CustomStringConvertible {
     case Duplicate(name: String)
     case NotFound(name: String)
     
-    var message: String {
+    var description: String {
         switch self {
             case .Duplicate(let name):
                 return "\(name)은 이미 존재하는 학생입니다. 추가하지 않습니다."

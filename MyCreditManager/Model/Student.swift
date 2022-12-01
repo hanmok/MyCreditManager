@@ -21,20 +21,21 @@ func makeStudent(name: String, students: [Student]) throws -> Student {
 }
 
 func handleStudentAddition(students: [Student], completion: (Student?) -> () ) {
-    print(IntroMessage.studentAddition.message)
+    printMessage(type: IntroMessage.studentAddition)
     let input = readLine()
     guard let name = input, name != "" else {
-        print(InputError.wrong.message)
+        printError(type: InputError.wrong)
         return
     }
     
     do {
         let student = try makeStudent(name: name, students: students)
-        print(CompletionMessage.studentAddition(name: name).message)
+
+        printMessage(type: CompletionMessage.studentAddition(name: name))
         completion(student)
         
     } catch StudentError.Duplicate {
-        print(StudentError.Duplicate(name: name).message)
+        printError(type: StudentError.Duplicate(name: name))
     } catch {
         return
     }
@@ -49,21 +50,21 @@ func getDeletingStudent(name: String, students: [Student]) throws -> Student {
 }
 
 func handleStudentDeletion(students: [Student], completion: (Student?) -> ()) {
-    print(IntroMessage.studentDeletion.message)
+    printMessage(type: IntroMessage.studentDeletion)
     let input = readLine()
     guard let name = input, name != "" else {
-        print(InputError.wrong.message)
+        printError(type: InputError.wrong)
         return
     }
     
     do {
         let student = try getDeletingStudent(name: name, students: students)
-        print(CompletionMessage.studentDeletion(name: name).message)
+        printMessage(type: CompletionMessage.studentDeletion(name: name))
         completion(student)
     } catch InputError.wrong {
-        print(InputError.wrong.message)
+        printError(type: InputError.wrong)
     } catch StudentError.NotFound {
-        print(StudentError.NotFound(name: name).message)
+        printError(type: StudentError.NotFound(name: name))
     } catch {
         return
     }

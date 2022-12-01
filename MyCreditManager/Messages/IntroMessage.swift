@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum IntroMessage {
+enum IntroMessage: Message, CustomStringConvertible {
     case main
     case studentAddition
     case studentDeletion
@@ -15,7 +15,7 @@ enum IntroMessage {
     case gradeDeletion
     case gradePrinting
     
-    var message: String {
+    var description: String {
         switch self {
             case .main:
                 return """

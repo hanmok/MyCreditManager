@@ -19,46 +19,47 @@ enum MenuSelectionType: String {
 var students = [Student]()
 
 func run() {
-    print(IntroMessage.main.message)
+    printMessage(type: IntroMessage.main)
     guard let command = readLine() else {
         run()
         return
     }
-
-        switch command {
-            case MenuSelectionType.studentAddition.rawValue:
-                handleStudentAddition(students: students) { student in
-                    guard let student = student else { return }
-                    students.append(student)
-                }
-                
-            case MenuSelectionType.studentDeletion.rawValue:
-                handleStudentDeletion(students: students) { student in
-                    guard let deletingStudent = student else { return }
-                    students.removeAll(where: { $0 == deletingStudent })
-                }
-                
-            case MenuSelectionType.scoreUpdate.rawValue:
-                handleUpdatingGrade(from: students) { student in
-                    guard let student = student else { return }
-                    students = getNewStudents(from: students, updated: student)
-                }
-                
-            case MenuSelectionType.scoreDeletion.rawValue:
-                handleDeletingGrade(from: students) { student in
-                    guard let student = student else { return }
-                    students = getNewStudents(from: students, updated: student)
-                }
-
-            case MenuSelectionType.scorePrinting.rawValue:
-                handlePrintingScores(from: students)
-                
-            case MenuSelectionType.end.rawValue:
-                print(CompletionMessage.endProgram.message)
-                return
-            default:
-                print(InputError.wrongInitial.message)
+    printError(type: InputError.wrong)
+    switch command {
+    case MenuSelectionType.studentAddition.rawValue:
+        handleStudentAddition(students: students) { student in
+            guard let student = student else { return }
+            students.append(student)
         }
+        
+    case MenuSelectionType.studentDeletion.rawValue:
+        handleStudentDeletion(students: students) { student in
+            guard let deletingStudent = student else { return }
+            students.removeAll(where: { $0 == deletingStudent })
+        }
+        
+    case MenuSelectionType.scoreUpdate.rawValue:
+        handleUpdatingGrade(from: students) { student in
+            guard let student = student else { return }
+            students = getNewStudents(from: students, updated: student)
+        }
+        
+    case MenuSelectionType.scoreDeletion.rawValue:
+        handleDeletingGrade(from: students) { student in
+            guard let student = student else { return }
+            students = getNewStudents(from: students, updated: student)
+        }
+        
+    case MenuSelectionType.scorePrinting.rawValue:
+        handlePrintingScores(from: students)
+        
+    case MenuSelectionType.end.rawValue:
+        printMessage(type: CompletionMessage.endProgram)
+        return
+        
+    default:
+        printError(type: InputError.wrongInitial)
+    }
     run()
 }
 

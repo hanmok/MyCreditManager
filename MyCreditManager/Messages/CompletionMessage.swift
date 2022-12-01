@@ -7,14 +7,16 @@
 
 import Foundation
 
-enum CompletionMessage {
+protocol Message {}
+
+enum CompletionMessage: Message, CustomStringConvertible {
     case studentAddition(name: String)
     case studentDeletion(name: String)
     case gradeUpdate(studentName: String, subjectName: String, score: String)
     case gradeDeletion(studentName: String, subjectName: String)
     case endProgram
     
-    var message: String {
+    var description: String {
         switch self {
             case .studentAddition(let name):
                 return "\(name) 학생을 추가했습니다."
@@ -28,4 +30,8 @@ enum CompletionMessage {
                 return "프로그램을 종료합니다..."
         }
     }
+}
+
+func printMessage<T: Message>(type: T) where T: CustomStringConvertible {
+    print(type.description)
 }

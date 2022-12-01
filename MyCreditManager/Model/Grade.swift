@@ -37,7 +37,6 @@ struct Grade {
 
 // MARK: - Update Grade
 func updateGrade(students: [Student], input: String) throws -> Student{
-    
     let components = input.components(separatedBy: " ")
     guard components.count == 3 else {
         throw InputError.wrong
@@ -50,17 +49,16 @@ func updateGrade(students: [Student], input: String) throws -> Student{
     }
     
     targetStudent.grade.scores[subjectName] = score
-    print(CompletionMessage.gradeUpdate(studentName: studentName, subjectName: subjectName, score: score).message)
+    printMessage(type: CompletionMessage.gradeUpdate(studentName: studentName, subjectName: subjectName, score: score))
     
     return targetStudent
 }
 
 func handleUpdatingGrade(from students: [Student], completion: (Student?) -> Void) {
-    print(IntroMessage.gradeAddition.message)
-    
+    printMessage(type: IntroMessage.gradeAddition)
     let input = readLine()
     guard let input = input, input != "" else {
-        print(InputError.wrong.message)
+        printError(type: InputError.wrong)
         completion(nil)
         return
     }
@@ -69,12 +67,10 @@ func handleUpdatingGrade(from students: [Student], completion: (Student?) -> Voi
         let targetStudent = try updateGrade(students: students, input: input)
         completion(targetStudent)
     } catch InputError.wrong {
-        print(InputError.wrong.message)
+        printError(type: InputError.wrong)
     } catch GradeError.invalidStudent(let name) {
-        print(GradeError.invalidStudent(name: name).message)
-    } catch {
-        
-    }
+        printError(type: GradeError.invalidStudent(name: name))
+    } catch { }
     completion(nil)
 }
 
@@ -90,16 +86,16 @@ func deleteGrade(students: [Student], input: String) throws -> Student {
         throw GradeError.invalidStudent(name: studentName)
     }
     targetStudent.grade.scores[subjectName] = nil
-    print(CompletionMessage.gradeDeletion(studentName: studentName, subjectName: subjectName).message)
+    printMessage(type: CompletionMessage.gradeDeletion(studentName: studentName, subjectName: subjectName))
     return targetStudent
 }
 
 func handleDeletingGrade(from students: [Student], completion: (Student?) -> Void) {
-    print(IntroMessage.gradeDeletion.message)
+    printMessage(type: IntroMessage.gradeDeletion)
     
     let input = readLine()
     guard let input = input, input != "" else {
-        print(InputError.wrong.message)
+        printError(type: InputError.wrong)
         completion(nil)
         return
     }
@@ -107,12 +103,10 @@ func handleDeletingGrade(from students: [Student], completion: (Student?) -> Voi
         let targetStudent = try deleteGrade(students: students, input: input)
         completion(targetStudent)
     } catch InputError.wrong {
-        print(InputError.wrong.message)
+        printError(type: InputError.wrong)
     } catch GradeError.invalidStudent(let studentName) {
-        print(GradeError.invalidStudent(name: studentName).message)
-    } catch {
-        
-    }
+        printError(type: GradeError.invalidStudent(name: studentName))
+    } catch { }
     completion(nil)
 }
 
@@ -129,16 +123,17 @@ func printScores(students: [Student], name: String) throws {
 }
 
 func handlePrintingScores(from students: [Student]) {
-    print(IntroMessage.gradePrinting.message)
+    printMessage(type: IntroMessage.gradePrinting)
     let input = readLine()
     guard let input = input, input != "" else {
-        print(InputError.wrong.message)
+        printError(type: InputError.wrong)
         return
     }
     do {
         try printScores(students: students, name: input)
     } catch StudentError.NotFound(let name) {
-        print(StudentError.NotFound(name: name).message)
+
+        printError(type: StudentError.NotFound(name: name))
     } catch {
         return
     }
